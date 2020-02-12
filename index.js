@@ -26,7 +26,9 @@ var dummy = {"Person": {name: "Ram", age: 30}}
 // console.log("tasklist = ", todolist.tasklist);  
 // const myJSON = JSON.stringify(todolist);
 // gun.get('tododatar').put(todolist).put( {tasklist: tasklist})
-gun.get('tododataa').put(todolist).put ( {tasklist: tasklist})
+
+gun.get('tododatab').put(todolist).put ( {tasklist: tasklist})
+
 // gun.get('tododatad/tasklist').put(tasklist)
 // gun.get('tasklist').put(tasklist)
 
@@ -46,7 +48,7 @@ gun.get('tododataa').put(todolist).put ( {tasklist: tasklist})
 //   gun.get(data).on((value, field) => { console.log("list = ", field , value)})
 // })
 
-gun.get('tododataa').once(function (todo, id) {
+gun.get('tododatab').once(function (todo, id) {
   // console.log(todo.newTaskEstimate);
   // console.log(todo.newTaskName);
   // console.log(todo.activeTask);
@@ -65,7 +67,7 @@ gun.get('tododataa').once(function (todo, id) {
 
   ////////
   var tlist = {}
-  gun.get('tododataa').get('tasklist').map().on(function (task, id) {
+  gun.get('tododatab').get('tasklist').map().on(function (task, id) {
     
     // console.log(task)
     // console.log("task id ", id)
@@ -84,6 +86,19 @@ gun.get('tododataa').once(function (todo, id) {
   console.log("Todo data =",json)
 })
 
+var tlist = {}
+var uniqid = Date.now();
+
+
+
+newTask = {actual: 0, estimate: 30, name: "newTask", id: 10, status: "Pause"}
+tlist[uniqid] = newTask
+console.log(tlist)
+console.log(uniqid)
+// 
+tl = gun.get('tododatab').get('tasklist');
+tl.put(tlist);
+console.log("newTask written");
 // gun.get('tododataa').map().on(function (todo, id) {
 //   // Check if the todo element already exists.
 //   // This can happen because GUN sometimes sends mulitple change events for the same item.

@@ -92,13 +92,45 @@ var uniqid = Date.now();
 
 
 newTask = {actual: 0, estimate: 30, name: "newTask", id: 10, status: "Pause"}
+taskToUpdate = {actual: 0, estimate: 30, name: "UpdatedTask", id: 10, status: "Start"}
 tlist[uniqid] = newTask
 console.log(tlist)
 console.log(uniqid)
+
+//ADD Task
 // 
-tl = gun.get('tododatab').get('tasklist');
-tl.put(tlist);
+tl = gun.get('tododatab').get('tasklist')
+// tl.put(tlist);
 console.log("newTask written");
+
+
+//Update Task
+tlist = {}
+gun.get('tododatab').get('tasklist').map().once(function(task, id) {
+    if(task.id == 11)
+    {
+      var data = {
+          "id": task.id,
+          "actual": task.actual + 1,
+          "estimate": task.estimate,
+          "name": task.name,
+          "status": "Pause"
+      }
+      tlist[id] = data
+      var tl = gun.get('tododatab').get('tasklist');
+      tl.put(tlist);
+    }
+})
+
+
+
+console.log("updated data");
+console.log(tlist);
+///////
+
+// gun.get('tododatab').get('tasklist')
+// rt = tl.update({find: 'id'}, {$set: {just: "my stinking location"}})
+// console.log("update written", rt);
 // gun.get('tododataa').map().on(function (todo, id) {
 //   // Check if the todo element already exists.
 //   // This can happen because GUN sometimes sends mulitple change events for the same item.

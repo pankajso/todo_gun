@@ -14,11 +14,11 @@ var todolist = {
 
 }
 
-const tasklist = { Lwe: {actual: 0, estimate: 30, id: 1, name: "aa", status: "Pause" }, 
-                Lwf: {actual: 0, estimate: 30, id: 2, name: "bb", status: "Pause"}, 
-                Lwg: {actual: 0, estimate: 30, id: 3, name: "cc", status: "Pause"}, 
-                Lwh: {actual: 0, estimate: 30, id: 4, name: "dd", status: "Pause"}, 
-                Lwi: {actual: 0, estimate: 30, id: 5, name: "ee", status: "Pause"}
+const tasklist = { "1": {actual: 0, estimate: 30, id: "1", name: "aa", status: "Pause" }, 
+                "2": {actual: 0, estimate: 30, id: "2", name: "bb", status: "Pause"}, 
+                "3": {actual: 0, estimate: 30, id: "3", name: "cc", status: "Pause"}, 
+                "4": {actual: 0, estimate: 30, id: "4", name: "dd", status: "Pause"}, 
+                "5": {actual: 0, estimate: 30, id: "5", name: "ee", status: "Pause"}
               }
 
 var dummy = {"Person": {name: "Ram", age: 30}}
@@ -27,7 +27,7 @@ var dummy = {"Person": {name: "Ram", age: 30}}
 // const myJSON = JSON.stringify(todolist);
 // gun.get('tododatar').put(todolist).put( {tasklist: tasklist})
 
-gun.get('tododatab').put(todolist).put ( {tasklist: tasklist})
+gun.get('tododatag').put(todolist).put ( {tasklist: tasklist})
 
 // gun.get('tododatad/tasklist').put(tasklist)
 // gun.get('tasklist').put(tasklist)
@@ -48,7 +48,7 @@ gun.get('tododatab').put(todolist).put ( {tasklist: tasklist})
 //   gun.get(data).on((value, field) => { console.log("list = ", field , value)})
 // })
 
-gun.get('tododatab').once(function (todo, id) {
+gun.get('tododatag').once(function (todo, id) {
   // console.log(todo.newTaskEstimate);
   // console.log(todo.newTaskName);
   // console.log(todo.activeTask);
@@ -67,7 +67,7 @@ gun.get('tododatab').once(function (todo, id) {
 
   ////////
   var tlist = {}
-  gun.get('tododatab').get('tasklist').map().on(function (task, id) {
+  gun.get('tododatag').get('tasklist').map().on(function (task, id) {
     
     // console.log(task)
     // console.log("task id ", id)
@@ -86,46 +86,46 @@ gun.get('tododatab').once(function (todo, id) {
   console.log("Todo data =",json)
 })
 
-var tlist = {}
-var uniqid = Date.now();
 
 
+// var tlist = {}
+// var uniqid = Date.now();
 
-newTask = {actual: 0, estimate: 30, name: "newTask", id: 10, status: "Pause"}
-taskToUpdate = {actual: 0, estimate: 30, name: "UpdatedTask", id: 10, status: "Start"}
-tlist[uniqid] = newTask
-console.log(tlist)
-console.log(uniqid)
+// newTask = {actual: 0, estimate: 30, name: "newTask", id: 10, status: "Pause"}
+// taskToUpdate = {actual: 0, estimate: 30, name: "UpdatedTask", id: 10, status: "Start"}
+// tlist[uniqid] = newTask
+// console.log(tlist)
+// console.log(uniqid)
 
 //ADD Task
 // 
-tl = gun.get('tododatab').get('tasklist')
+tl = gun.get('tododatag').get('tasklist')
 // tl.put(tlist);
 console.log("newTask written");
 
 
 //Update Task
-tlist = {}
-gun.get('tododatab').get('tasklist').map().once(function(task, id) {
-    if(task.id == 11)
-    {
-      var data = {
-          "id": task.id,
-          "actual": task.actual + 1,
-          "estimate": task.estimate,
-          "name": task.name,
-          "status": "Pause"
-      }
-      tlist[id] = data
-      var tl = gun.get('tododatab').get('tasklist');
-      tl.put(tlist);
-    }
-})
+// tlist = {}
+// gun.get('tododatab').get('tasklist').map().once(function(task, id) {
+//     if(task.id == 11)
+//     {
+//       var data = {
+//           "id": task.id,
+//           "actual": task.actual + 1,
+//           "estimate": task.estimate,
+//           "name": task.name,
+//           "status": "Pause"
+//       }
+//       tlist[id] = data
+//       var tl = gun.get('tododatab').get('tasklist');
+//       tl.put(tlist);
+//     }
+// })
 
 
 
-console.log("updated data");
-console.log(tlist);
+// console.log("updated data");
+// console.log(tlist);
 ///////
 
 // gun.get('tododatab').get('tasklist')
